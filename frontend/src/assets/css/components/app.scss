@@ -1,0 +1,16 @@
+html, body {
+	background: $ginker-ui;
+	color: $white;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: stretch;
+    align-items: flex-start;
+		border: 5px $ginker-dark solid;
+}

@@ -1,0 +1,18 @@
+.navigation {
+	order: 0;
+	flex: 0 1 auto;
+	align-self: auto;
+
+	.logo {
+		padding: 0.5rem;
+		cursor: pointer;
+
+		&:hover {
+			background-color: #354151;
+		}
+	}
+
+	img { 
+		width: 35px;
+	}
+}

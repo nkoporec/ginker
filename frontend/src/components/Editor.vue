@@ -6,7 +6,9 @@
         </div>
       </div>
       <div class="results">
-        <p>Ginker is awesome!</p>
+        <p>
+          {{ result }}
+        </p>
       </div>
     </div>
   </div>
@@ -20,23 +22,41 @@ import 'brace/theme/monokai';
 export default {
   data() {
     return {
-      message: " "
+      message: " ",
+      editor: null,
+      result: "",
+      typingTimer: null,
+      doneTypingInterval: 250
     };
   },
   methods: {
-    getMessage: function() {
-      var self = this;
-      window.backend.basic().then(result => {
-        self.message = result;
+    editorChange: function(value) {
+      window.backend.runCompiler(value).then(result => {
+        this.result = result;
       });
     }
   },
   mounted() {
-    console.log(document.querySelector('#brace'))
-    let editor = ace.edit(document.querySelector('#brace'))
-    editor.getSession().setMode("ace/mode/golang")
-    editor.setTheme("ace/theme/monokai")
-    editor.resize()
+    // Set up ace.
+    this.editor = ace.edit(document.querySelector('#brace'))
+    this.editor.getSession().setMode("ace/mode/golang")
+    this.editor.setTheme("ace/theme/monokai")
+    this.editor.resize()
+
+    // Set initial value.
+    this.editor.session.setValue(`package main\r\n\r\nimport (\r\n "fmt"\r\n)\r\n\r\nfunc main() {\r\n fmt.Println("Ginker is awesome")\r\n}\r\n`)
+
+    // Set change event.
+    let self = this;
+    this.editor.session.on('change', function() {
+      clearTimeout(this.typingTimer);
+      if (self.editor.getValue()) {
+        self.typingTimer = setTimeout(
+          self.editorChange.bind(null, self.editor.getValue()),
+          self.doneTypingInterval
+        );
+      }
+    });
   },
 };
 </script>

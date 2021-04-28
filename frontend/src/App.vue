@@ -12,6 +12,7 @@ import "./assets/css/main.scss";
 import Navigation from "./components/Navigation.vue";
 import Editor from "./components/Editor.vue";
 
+
 export default {
   name: "app",
   components: {

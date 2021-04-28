@@ -35,7 +35,9 @@
 			flex: 100100 1 auto;
 			align-self: auto;
 			width: 50%;
-			background-color: #272822;
+			font-family: monospace;
+			padding-left: 1rem;
+			background-color: $ginker-ui;
 			height: 1000px;
 			border-left: 5px $ginker-dark solid;
 		}

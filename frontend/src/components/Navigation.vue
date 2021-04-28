@@ -5,6 +5,20 @@
         <img class="" src="../assets/images/logo.png" alt="ginker" />
       </a>
     </div>
+    <aside class="">
+      <ul class="">
+        <li class="" title="Terminal">
+          <a href="index" class="active">
+            <font-awesome-icon icon="terminal" />
+          </a>
+        </li>
+        <li class="" title="Settings">
+          <a href="settings" class="">
+            <font-awesome-icon icon="cog" />
+          </a>
+        </li>
+      </ul>
+    </aside>
   </div>
 </template>
 

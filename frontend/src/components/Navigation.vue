@@ -8,14 +8,12 @@
     <aside class="">
       <ul class="">
         <li class="" title="Terminal">
-          <a href="index" class="active">
+          <router-link to="/editor">
             <font-awesome-icon icon="terminal" />
-          </a>
-        </li>
-        <li class="" title="Settings">
-          <a href="settings" class="">
+          </router-link>
+          <router-link to="/settings">
             <font-awesome-icon icon="cog" />
-          </a>
+          </router-link>
         </li>
       </ul>
     </aside>
@@ -26,16 +24,11 @@
 export default {
   data() {
     return {
-      message: " "
     };
   },
   methods: {
-    getMessage: function() {
-      var self = this;
-      window.backend.basic().then(result => {
-        self.message = result;
-      });
-    }
-  }
+  },
+  mounted() {
+  },
 };
 </script>

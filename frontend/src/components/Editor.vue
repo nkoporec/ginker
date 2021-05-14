@@ -57,6 +57,12 @@ export default {
         );
       }
     });
+
+    // Set correct height.
+    const editor = document.querySelector(".brace-editor");
+    editor.style.height = `${window.screen.height}px`;
+    const results = document.querySelector(".results");
+    results.style.height = `${window.screen.height}px`;
   },
 };
 </script>

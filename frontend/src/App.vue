@@ -2,7 +2,7 @@
   <div id="app">
     <div class="container">
       <Navigation />
-      <Editor />
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -10,14 +10,20 @@
 <script>
 import "./assets/css/main.scss";
 import Navigation from "./components/Navigation.vue";
-import Editor from "./components/Editor.vue";
-
 
 export default {
   name: "app",
   components: {
     Navigation,
-    Editor,
-  }
+  },
+  methods: {
+    windowHeight: function() {
+      return window.screen.height;
+    }
+  },
+  mounted() {
+    const container = document.querySelector(".container");
+    container.style.height = `${this.windowHeight()}px`;
+  },
 };
 </script>

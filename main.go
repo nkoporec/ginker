@@ -1,11 +1,15 @@
 package main
 
 import (
-  _ "embed"
+	_ "embed"
+	"log"
 	"os"
 	"os/exec"
-  "github.com/wailsapp/wails"
-  "github.com/nkoporec/ginker/compiler"
+
+	"github.com/mitchellh/mapstructure"
+	"github.com/nkoporec/ginker/compiler"
+	"github.com/spf13/viper"
+	"github.com/wailsapp/wails"
 )
 
 //go:embed frontend/dist/app.js
@@ -21,7 +25,7 @@ func main() {
 	if err != nil {
 	}
 
-  // Create module.
+	// Create module.
 	dirConfig, err := compiler.GetDirConfig()
 	if err != nil {
 	}
@@ -30,16 +34,19 @@ func main() {
 	// Load config.
 	compiler.LoadConfig(dirConfig.Dir)
 
-  app := wails.CreateApp(&wails.AppConfig{
-    Width:  1024,
-    Height: 768,
-    Title:  "ginker",
-    JS:     js,
-    CSS:    css,
-    Colour: "#131313",
-  })
-  app.Bind(runCompiler)
-  app.Run()
+	app := wails.CreateApp(&wails.AppConfig{
+		Width:     1024,
+		Height:    768,
+		Title:     "ginker",
+		JS:        js,
+		CSS:       css,
+		Colour:    "#131313",
+		Resizable: true,
+	})
+	app.Bind(runCompiler)
+	app.Bind(getSettings)
+	app.Bind(saveSettings)
+	app.Run()
 }
 
 func runCompiler(value string) (string, error) {
@@ -74,8 +81,41 @@ func runCompiler(value string) (string, error) {
 	// @TODO: This should work with execute()
 	result, err := exec.Command(compiler.GetGoBinaryPath(), "run", ginkerDir.File).Output()
 	if err != nil {
-    return err.Error(), nil
+		return err.Error(), nil
 	}
 
 	return string(result), nil
+}
+
+func getSettings() (compiler.Config, error) {
+	dirConfig, err := compiler.GetDirConfig()
+
+	// Send config.
+	config, err := compiler.LoadConfig(dirConfig.Dir)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return config, nil
+}
+
+// Declare course structure
+type Settings struct {
+	GolangBinary string
+	FontSize     string
+	FontFamily   string
+	LineHeight   string
+}
+
+func saveSettings(data map[string]interface{}) (string, error) {
+	settings := Settings{}
+	mapstructure.Decode(data, &settings)
+
+	viper.Set("GOLANG_BINARY", settings.GolangBinary)
+	viper.Set("FONT_SIZE", settings.FontSize)
+	viper.Set("FONT_FAMILY", settings.FontFamily)
+	viper.Set("LINE_HEIGHT", settings.LineHeight)
+	viper.WriteConfig()
+
+	return "true", nil
 }

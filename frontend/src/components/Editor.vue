@@ -63,6 +63,17 @@ export default {
     editor.style.height = `${window.screen.height}px`;
     const results = document.querySelector(".results");
     results.style.height = `${window.screen.height}px`;
+
+    // Apply settings.
+    window.backend.getSettings().then(settings => {
+      this.editor.setOptions({
+        fontFamily: settings.FontFamily,
+      });
+      this.editor.setFontSize(Number(settings.FontSize))
+
+      this.editor.container.style.lineHeight = Number(settings.LineHeight)
+      this.editor.renderer.updateFontSize()
+    });
   },
 };
 </script>

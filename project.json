@@ -1,12 +1,12 @@
 {
- "name": "ginker",
- "description": "Enter your project description",
+ "name": "Ginker",
+ "description": "Auto-evaluate your Golang code.",
  "author": {
   "name": "nkoporec",
   "email": "me@nkoporec.com"
  },
  "version": "0.1.0",
- "binaryname": "ginker",
+ "binaryname": "Ginker",
  "frontend": {
   "dir": "frontend",
   "install": "npm install",

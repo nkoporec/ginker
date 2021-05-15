@@ -8,7 +8,7 @@ Ginker is a GUI application for auto-evaluating your Golang code. It allows you 
 
 It's similar to [Go Playground](https://play.golang.org/) but instead of using a web service, it will evaluate your Golang code locally using your Golang binary.
 
-## Install/run
+## Installation
 
 ### macOS
 
@@ -21,6 +21,28 @@ Currently not suported.
 ### Linux
 
 Extract the .tar.gz and run the executable
+
+## Building
+
+Clone the repository
+
+```shell
+git clone git@github.com:nkoporec/ginker.git
+cd ginker
+```
+
+Start wails server
+
+```shell
+wails serve
+```
+
+Start frontend tools
+
+```shell
+cd frontend
+npm run serve
+```
 
 ## Compiling
 
@@ -52,11 +74,9 @@ _Also succesfully tested on: Zorin 15, Parrot 4.7, Linuxmint 19, Elementary 5, K
 
 `sudo pacman -S webkit2gtk gtk3`
 
-### Clone and build the app
+### Build the app
 
 ```shell
-git clone git@github.com:nkoporec/ginker.git
-cd ginker
 wails build
 ```
 

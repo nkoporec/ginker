@@ -24,6 +24,8 @@ Extract the .tar.gz and run the executable
 
 ## Building
 
+Make sure you have [Go](https://golang.org/dl/) and [Wails](https://github.com/wailsapp/wails) installed.
+
 Clone the repository
 
 ```shell
@@ -49,7 +51,7 @@ npm run serve
 Ginker is built using [Wails](https://github.com/wailsapp/wails)
 
 * Install Go [https://golang.org/dl/](https://golang.org/dl/)
-
+* Install Wails [https://github.com/wailsapp/wails](https://github.com/wailsapp/wails)
 * Install required dependencies
 
 #### MacOS

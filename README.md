@@ -16,7 +16,7 @@ Install from [.dmg](https://github.com/nkoporec/ginker/releases) and run as any 
 
 ### Windows
 
-Just run `ginker.exe`.
+Currently not suported.
 
 ### Linux
 
@@ -26,21 +26,19 @@ Extract the .tar.gz and run the executable
 
 Ginker is built using [Wails](https://github.com/wailsapp/wails)
 
-* Install Go
-
-[https://golang.org/dl/](https://golang.org/dl/)
+* Install Go [https://golang.org/dl/](https://golang.org/dl/)
 
 * Install required dependencies
 
-### MacOS
+#### MacOS
 
 Make sure you have the xcode command line tools installed. This can be done by running:
 
 `xcode-select --install`
 
-### Linux
+#### Linux
 
-#### Debian/Ubuntu
+##### Debian/Ubuntu
 
 `sudo apt install libgtk-3-dev libwebkit2gtk-4.0-dev`
 
@@ -50,15 +48,11 @@ _Ubuntu: 16.04, 18.04, 19.04_
 
 _Also succesfully tested on: Zorin 15, Parrot 4.7, Linuxmint 19, Elementary 5, Kali, Neon_, Pop!_OS
 
-#### Arch Linux / ArchLabs / Ctlos Linux
+##### Arch Linux / ArchLabs / Ctlos Linux
 
 `sudo pacman -S webkit2gtk gtk3`
 
-### Windows
-
-Windows requires gcc and related tooling. The recommended download is from [http://tdm-gcc.tdragon.net/download](http://tdm-gcc.tdragon.net/download). Once this is installed, you are good to go.
-
-* Clone and build the app
+### Clone and build the app
 
 ```shell
 git clone git@github.com:nkoporec/ginker.git

@@ -7,8 +7,15 @@ import (
 )
 
 func GetGoBinaryPath() string {
-	// @TODO: This should use the viper config.
-	binary,_ := whichGoBinary()
+	ginkerDir, _ := GetDirConfig()
+	config, _ := LoadConfig(ginkerDir.Dir)
+
+	binary := ""
+	if len(config.GolangBinary) > 0 {
+		binary = config.GolangBinary
+	} else {
+		binary, _ = whichGoBinary()
+	}
 
 	// Make sure we don't have any new lines.
 	binary = strings.TrimSuffix(binary, "\n")

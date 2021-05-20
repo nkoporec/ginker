@@ -60,6 +60,19 @@ func SaveConfig(path string, config *Config) {
 func whichGoBinary() (string, error) {
 	goBinary := ""
 
+	// If we have a saved binary, then use it.
+	dirConfig, err := GetDirConfig()
+	config, err := LoadConfig(dirConfig.Dir)
+	if err != nil {
+		return "", err
+	}
+
+	if len(config.GolangBinary) >= 1 {
+		return config.GolangBinary, nil
+	}
+
+	// If we don't have (on first startup) then
+	// try to get it, by running $(which)
 	// @TODO: How to do this in Windows ?
 	switch os := runtime.GOOS; os {
 	case "darwin":

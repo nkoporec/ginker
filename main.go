@@ -99,7 +99,7 @@ func getSettings() (compiler.Config, error) {
 	return config, nil
 }
 
-// Declare course structure
+// Declare settings structure
 type Settings struct {
 	GolangBinary string
 	FontSize     string

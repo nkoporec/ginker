@@ -3,6 +3,7 @@ package compiler
 import (
 	"os"
 	"os/exec"
+	"path"
 	"path/filepath"
 	"runtime"
 
@@ -63,14 +64,22 @@ func whichGoBinary() (string, error) {
 	// If we don't have (on first startup) then
 	// try to get it, by running $(which)
 	// @TODO: How to do this in Windows ?
-	switch os := runtime.GOOS; os {
+	switch runtime.GOOS {
 	case "darwin", "linux":
 		cmd := exec.Command("which", "go")
 		stdout, err := cmd.Output()
 
+		// @TODO: Add error handling.
 		if err != nil {
 		}
+
 		goBinary = string(stdout)
+
+		// If the user runs the app from within
+		// the macOS app bundle, then the env will not be inherited.
+		if goBinary == "" && runtime.GOROOT() != "" {
+			goBinary = filepath.Clean(path.Join(runtime.GOROOT(), "bin", "go"))
+		}
 	}
 
 	return goBinary, nil

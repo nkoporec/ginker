@@ -43,6 +43,7 @@ Start frontend tools
 
 ```shell
 cd frontend
+npm run build
 npm run serve
 ```
 
